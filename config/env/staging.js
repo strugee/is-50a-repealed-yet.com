@@ -6,14 +6,18 @@
  * inherits from the production settings to keep staging as close to
  * production as possible.
  * 
- * When running in staging, set NODE_ENV=production to ensure that
+ * When running in staging, NODE_ENV=production is set to ensure that
  * Sails and its dependencies still run in production mode, and set
  * sails_environment=staging to load this file. Note that even when
  * running with sails_environment=staging, the production Grunt asset
  * pipeline will still be used (the staging Grunt registration file is
- * a symlink to the production version).
+ * an alias to the production version).
  *
  */
+
+// This should be set in the environment anyway in the real staging, because things before this will miss it
+// This is only here to make `sails lift --staging` closer to the real thing
+process.env.NODE_ENV = 'production';
 
 var prodConfig = require('./production');
 var ourConfig = {
