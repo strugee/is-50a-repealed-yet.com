@@ -15,7 +15,9 @@ module.exports = {
 
     firstName: { type: 'string', required: true },
     phoneNumber: { type: 'string', required: true },
-    zip: { type: 'number', required: true }
+    address: { type: 'string', required: true },
+    resolvedLatitude: { type: 'number', required: true },
+    resolvedLongitude: { type: 'number', required: true },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -25,6 +27,9 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
+    senator: { model: 'Senator', required: true },
+    assemblyperson: { model: 'Assemblyperson', required: true }
 
   },
 

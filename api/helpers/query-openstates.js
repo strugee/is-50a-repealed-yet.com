@@ -113,6 +113,8 @@ module.exports = {
     var assemblyPromise = Assemblyperson.findOrCreate({ name: assembly.name }, assembly);
 
     return {
+      longitude: variables.longitude,
+      latitude: variables.latitude,
       senator: await senatePromise,
       assemblyperson: await assemblyPromise
     };
