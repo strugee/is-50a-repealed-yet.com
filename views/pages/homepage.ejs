@@ -15,10 +15,11 @@
 		<br>
 		<input type="tel" name="phoneNumber" id="phonenumber" required>
 		<br>
-		<label for="zip">New York State ZIP code:</label>
+		<label for="address">New York State address:</label>
 		<br>
-		<input type="number" name="zip" id="zip" required>
+		<input type="text" name="address" id="address" required>
 		<br>
+		<input type="hidden" name="_csrf" value="<%= _csrf %>" />
 		<input type="submit" value="Submit">
 	</form>
 </div>
