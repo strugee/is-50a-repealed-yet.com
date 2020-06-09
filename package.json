@@ -36,6 +36,6 @@
   "author": "alex",
   "license": "",
   "engines": {
-    "node": "^14.4"
+    "node": "^10.21"
   }
 }
