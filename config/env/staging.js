@@ -22,7 +22,7 @@ process.env.NODE_ENV = 'production';
 var prodConfig = require('./production');
 var ourConfig = {
   log: {
-    level: 'verbose'
+    level: 'silly'
   }
 }
 
