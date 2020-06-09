@@ -39,7 +39,9 @@ module.exports = {
 
 
   fn: async function (inputs) {
+    sails.log.silly('Querying Mapbox.');
     var geoData = await geocode('mapbox.places', inputs.address);
+    sails.log.silly('Raw Mapbox response:', geoData);
     // TODO is it right to just pick the first one?
     var coords = geoData.features[0].center;
 
@@ -47,6 +49,7 @@ module.exports = {
       longitude: coords[0],
       latitude: coords[1]
     };
+    sails.log.silly('Picked these coordinates to pass to OpenStates:', variables);
     var query = `query ContactInfoByLocation ($latitude:Float!, $longitude:Float!) {
       people(latitude: $latitude, longitude: $longitude, first: 10) {
         edges {
@@ -72,9 +75,12 @@ module.exports = {
         }
       }
     }`;
+    sails.log.silly('Querying OpenStates.');
     var osRes = await client.request(query, variables);
+    sails.log.silly('OpenStates raw response:', osRes);
     var data = osRes.people.edges;
 
+    sails.log.silly('Validating response data.');
     // We're expecting only 2 legislators
     assert.equal(data.length, 2);
     var chambers = data.map(obj => obj.node.chamber);
@@ -87,6 +93,7 @@ module.exports = {
     });
     // And we should have one upper and one lower chamber
     assert.deepEqual(chambers.map(c => c.organization.classification).sort(), ['lower', 'upper']);
+    sails.log.silly('OpenStates response validation finished successfully.');
 
     var assembly;
     var senate;
@@ -108,10 +115,12 @@ module.exports = {
       }
     });
 
+    sails.log.silly('Creating Senator and Assemblyperson query promises.');
     // Parallelization
     var senatePromise = Senator.findOrCreate({ name: senate.name }, senate);
     var assemblyPromise = Assemblyperson.findOrCreate({ name: assembly.name }, assembly);
 
+    sails.log.silly('Returning OpenStates computed data.');
     return {
       longitude: variables.longitude,
       latitude: variables.latitude,

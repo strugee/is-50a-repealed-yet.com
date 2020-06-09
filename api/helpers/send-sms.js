@@ -47,7 +47,7 @@ module.exports = {
       to: inputs.phoneNumber
     });
 
-    sails.log.silly(msg.sid);
+    sails.log.silly('Twilio message SID:', msg.sid);
   }
 };
 
