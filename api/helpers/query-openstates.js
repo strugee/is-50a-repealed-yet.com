@@ -116,16 +116,18 @@ module.exports = {
     });
 
     sails.log.silly('Creating Senator and Assemblyperson query promises.');
-    // Parallelization
-    var senatePromise = Senator.findOrCreate({ name: senate.name }, senate);
-    var assemblyPromise = Assemblyperson.findOrCreate({ name: assembly.name }, assembly);
+    // TODO: originally these `await` keywords were below, as part of the return statement. This
+    //  was to parallelize the code. However, while this worked in development, it hung in staging
+    //  for some unknown reason. Fix this to be actually parallel.
+    var senatePromise = await Senator.findOrCreate({ name: senate.name }, senate);
+    var assemblyPromise = await Assemblyperson.findOrCreate({ name: assembly.name }, assembly);
 
     sails.log.silly('Returning OpenStates computed data.');
     return {
       longitude: variables.longitude,
       latitude: variables.latitude,
-      senator: await senatePromise,
-      assemblyperson: await assemblyPromise
+      senator: senatePromise,
+      assemblyperson: assemblyPromise
     };
   }
 
