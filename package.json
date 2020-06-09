@@ -16,7 +16,6 @@
     "sails": "^1.2.4",
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
-    "sails-hook-sentry": "^2.0.0-beta.2",
     "sails-postgresql": "^1.0.2",
     "twilio": "^3.45.0"
   },
