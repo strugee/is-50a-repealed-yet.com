@@ -9,6 +9,10 @@
  * https://sailsjs.com/config/http
  */
 
+var Sentry = require('@sentry/node');
+// TODO this is a hack because `sails` isn't defined yet
+Sentry.init({ dsn: require('./env/production').custom.sentry.dsn });
+
 module.exports.http = {
 
   /****************************************************************************
@@ -29,16 +33,18 @@ module.exports.http = {
     *                                                                          *
     ***************************************************************************/
 
-    // order: [
-    //   'cookieParser',
-    //   'session',
-    //   'bodyParser',
-    //   'compress',
-    //   'poweredBy',
-    //   'router',
-    //   'www',
-    //   'favicon',
-    // ],
+     order: [
+       'sentryRequest',
+       'cookieParser',
+       'session',
+       'bodyParser',
+       'compress',
+       'poweredBy',
+       'router',
+       'www',
+       'favicon',
+       'sentryError'
+     ],
 
 
     /***************************************************************************
@@ -54,6 +60,10 @@ module.exports.http = {
     //   var middlewareFn = skipper({ strict: true });
     //   return middlewareFn;
     // })(),
+
+    // Sentry error tracking
+    sentryRequest: Sentry.Handlers.requestHandler(),
+    sentryError: Sentry.Handlers.errorHandler()
 
   },
 

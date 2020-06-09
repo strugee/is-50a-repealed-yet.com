@@ -379,7 +379,7 @@ module.exports = {
       authToken: process.env.TWILIO_AUTHTOKEN
     },
     openStatesApiKey: process.env.OPENSTATES_APIKEY,
-    mapboxToken: process.env.MAPBOX_TOKEN
+    mapboxToken: process.env.MAPBOX_TOKEN,
 
     // sendgridSecret: 'SG.fake.3e0Bn0qSQVnwb1E4qNPz9JZP5vLZYqjh7sn8S93oSHU',
     // stripeSecret: 'sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm',
@@ -393,6 +393,11 @@ module.exports = {
     // sails_custom__stripeSecret=sk_prod__fake_Nfgh82401348jaDa3lkZ0d9Hm
     // ```
     //--------------------------------------------------------------------------
+
+    sentry: {
+      //active: true, // This value is not respected!
+      dsn: process.env.SENTRY_DSN,
+    }
 
   }
 
