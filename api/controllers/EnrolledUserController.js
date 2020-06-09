@@ -34,10 +34,10 @@ module.exports = {
 		//Object.assign(req.body, computedData);
 		Object.assign(submittedData, computedData);
 
-		await EnrolledUser.create(submittedData;
+		await EnrolledUser.create(submittedData);
 
 		await sails.helpers.sendSms(req.body.phoneNumber, "Thanks! You've successfully pledged with Is 50-A Repealed Yet?.");
 
-		res.view('pages/confirmation', {name: req.body.firstName, phoneNumber: computedData.phoneNumber, senatorName: });
+		res.view('pages/confirmation', {name: req.body.firstName, phoneNumber: computedData.phoneNumber, senatorName: locationInfo.senator.name, assemblypersonName: locationInfo.assemblyperson.name });
 	}
 };
