@@ -34,4 +34,5 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/register': 'EnrolledUser.create',
+  '/debug-sentry': 'debug-sentry'
 };
