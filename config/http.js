@@ -35,6 +35,7 @@ module.exports.http = {
 
      order: [
        'sentryRequest',
+       'secure',
        'cookieParser',
        'session',
        'bodyParser',
@@ -63,7 +64,17 @@ module.exports.http = {
 
     // Sentry error tracking
     sentryRequest: Sentry.Handlers.requestHandler(),
-    sentryError: Sentry.Handlers.errorHandler()
+    sentryError: Sentry.Handlers.errorHandler(),
+
+    // HTTPS redirection
+    // I reviewed a concering number of middleware modules on npm that got this wrong - trusting `X-Forwarded-Proto` without Express `trust proxy` enabled, ignoring `X-Forwarded-Proto` even when `trust proxy` was enabled, not using permanent redirects, etc.
+    // Eventually I just decided to write my own, which I know I can do correctly, rather than review npm modules. It was faster this way.
+    secure: function(req, res, next) {
+      if (!req.secure && sails.config.custom.forceHTTPS) {
+        return res.redirect(301, 'https://' + req.hostname + req.originalUrl);
+      }
+      next();
+    }
 
   },
 

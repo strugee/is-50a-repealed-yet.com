@@ -397,7 +397,9 @@ module.exports = {
     sentry: {
       //active: true, // This value is not respected!
       dsn: process.env.SENTRY_DSN,
-    }
+    },
+
+    forceHTTPS: true
 
   }
 
