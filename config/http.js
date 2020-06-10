@@ -9,9 +9,12 @@
  * https://sailsjs.com/config/http
  */
 
+var hsts = require('hsts');
 var Sentry = require('@sentry/node');
 // TODO this is a hack because `sails` isn't defined yet
 Sentry.init({ dsn: require('./env/production').custom.sentry.dsn });
+// TODO same
+var hstsConfig = require('./env/production').custom.hsts;
 
 module.exports.http = {
 
@@ -36,6 +39,7 @@ module.exports.http = {
      order: [
        'sentryRequest',
        'secure',
+       'hsts',
        'cookieParser',
        'session',
        'bodyParser',
@@ -74,7 +78,12 @@ module.exports.http = {
         return res.redirect(301, 'https://' + req.hostname + req.originalUrl);
       }
       next();
-    }
+    },
+
+    // HTTP Strict Transport Security
+    hsts: (function() {
+      return hsts(hstsConfig);
+    })()
 
   },
 

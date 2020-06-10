@@ -399,7 +399,12 @@ module.exports = {
       dsn: process.env.SENTRY_DSN,
     },
 
-    forceHTTPS: true
+    forceHTTPS: true,
+    hsts: {
+      maxAge: 60 * 60 * 24 * 365, // One year
+      includeSubdomains: true,
+      preload: true
+    }
 
   }
 
