@@ -45,7 +45,7 @@ module.exports = {
 		await EnrolledUser.create(submittedData);
 
 		sails.log.silly('Sending confirmation SMS.');
-		await sails.helpers.sendSms(req.body.phoneNumber, "Thanks! You've successfully pledged with Is 50-A Repealed Yet?.");
+		await sails.helpers.sendSms(req.body.phoneNumber, "Thanks! You've successfully pledged with Is 50-A Repealed Yet?. Msg & data rates may apply. Text STOP to unsubscribe.");
 
 		sails.log.silly('Sending confirmation page.');
 		res.view('pages/confirmation', {name: req.body.firstName, phoneNumber: computedData.phoneNumber, senatorName: locationInfo.senator.name, assemblypersonName: locationInfo.assemblyperson.name });
