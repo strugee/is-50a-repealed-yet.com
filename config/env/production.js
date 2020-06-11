@@ -402,7 +402,7 @@ module.exports = {
     forceHTTPS: true,
     hsts: {
       maxAge: 60 * 60 * 24 * 365, // One year
-      includeSubdomains: true,
+      includeSubDomains: true,
       preload: true
     }
 
