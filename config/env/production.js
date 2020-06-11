@@ -184,6 +184,7 @@ module.exports = {
     * > (For a full list, see https://sailsjs.com/plugins/sessions)            *
     *                                                                          *
     ***************************************************************************/
+    secret: process.env.SECRET,
     adapter: '@sailshq/connect-redis',
     url: process.env.REDIS_URL,
     //--------------------------------------------------------------------------
