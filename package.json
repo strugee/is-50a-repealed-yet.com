@@ -10,7 +10,7 @@
     "@sailshq/socket.io-redis": "^5.2.0",
     "@sentry/node": "^5.17.0",
     "graphql-request": "^2.1.0-next.1",
-    "grunt": "1.0.4",
+    "grunt": "1.5.2",
     "hsts": "^2.2.0",
     "mapbox-geocoding": "^0.1.5",
     "phone": "^2.4.11",
